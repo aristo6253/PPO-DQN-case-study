@@ -1,0 +1,99 @@
+Logging to ./baseline_seed_data/test/
+----------------------------------
+| rollout/           |           |
+|    ep_len_mean     | 200       |
+|    ep_rew_mean     | -1.26e+03 |
+| time/              |           |
+|    fps             | 1367      |
+|    iterations      | 1         |
+|    time_elapsed    | 1         |
+|    total_timesteps | 2048      |
+----------------------------------
+------------------------------------------
+| rollout/                |              |
+|    ep_len_mean          | 200          |
+|    ep_rew_mean          | -1.23e+03    |
+| time/                   |              |
+|    fps                  | 934          |
+|    iterations           | 2            |
+|    time_elapsed         | 4            |
+|    total_timesteps      | 4096         |
+| train/                  |              |
+|    approx_kl            | 0.0020136037 |
+|    clip_fraction        | 0.00464      |
+|    clip_range           | 0.2          |
+|    entropy_loss         | -1.41        |
+|    explained_variance   | 0.000825     |
+|    learning_rate        | 0.0003       |
+|    loss                 | 4.67e+03     |
+|    n_updates            | 10           |
+|    policy_gradient_loss | -0.000983    |
+|    std                  | 0.987        |
+|    value_loss           | 9.66e+03     |
+------------------------------------------
+------------------------------------------
+| rollout/                |              |
+|    ep_len_mean          | 200          |
+|    ep_rew_mean          | -1.25e+03    |
+| time/                   |              |
+|    fps                  | 833          |
+|    iterations           | 3            |
+|    time_elapsed         | 7            |
+|    total_timesteps      | 6144         |
+| train/                  |              |
+|    approx_kl            | 0.0032538031 |
+|    clip_fraction        | 0.0145       |
+|    clip_range           | 0.2          |
+|    entropy_loss         | -1.4         |
+|    explained_variance   | 0.159        |
+|    learning_rate        | 0.0003       |
+|    loss                 | 4.11e+03     |
+|    n_updates            | 20           |
+|    policy_gradient_loss | -0.00191     |
+|    std                  | 0.975        |
+|    value_loss           | 8.58e+03     |
+------------------------------------------
+------------------------------------------
+| rollout/                |              |
+|    ep_len_mean          | 200          |
+|    ep_rew_mean          | -1.21e+03    |
+| time/                   |              |
+|    fps                  | 732          |
+|    iterations           | 4            |
+|    time_elapsed         | 11           |
+|    total_timesteps      | 8192         |
+| train/                  |              |
+|    approx_kl            | 0.0017408256 |
+|    clip_fraction        | 0.0019       |
+|    clip_range           | 0.2          |
+|    entropy_loss         | -1.39        |
+|    explained_variance   | 0.121        |
+|    learning_rate        | 0.0003       |
+|    loss                 | 3.91e+03     |
+|    n_updates            | 30           |
+|    policy_gradient_loss | -0.000723    |
+|    std                  | 0.963        |
+|    value_loss           | 9.07e+03     |
+------------------------------------------
+----------------------------------------
+| rollout/                |            |
+|    ep_len_mean          | 200        |
+|    ep_rew_mean          | -1.22e+03  |
+| time/                   |            |
+|    fps                  | 676        |
+|    iterations           | 5          |
+|    time_elapsed         | 15         |
+|    total_timesteps      | 10240      |
+| train/                  |            |
+|    approx_kl            | 0.00251879 |
+|    clip_fraction        | 0.00762    |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -1.38      |
+|    explained_variance   | 0.03       |
+|    learning_rate        | 0.0003     |
+|    loss                 | 3.45e+03   |
+|    n_updates            | 40         |
+|    policy_gradient_loss | -0.000696  |
+|    std                  | 0.959      |
+|    value_loss           | 7.71e+03   |
+----------------------------------------

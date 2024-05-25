@@ -1,4 +1,4 @@
-from network import FFNN
+from ppo.network import FFNN
 import torch
 from torch import nn
 from torch.distributions import MultivariateNormal
@@ -141,32 +141,29 @@ class PPO_ours:
 
             if self.save and i % self.save_freq == 0:
                 if self.ipynb:
-                    torch.save(self.actor.state_dict(), f"./actor/{self.name}/actor_{i}.pth")
-                    torch.save(self.critic.state_dict(), f"./critic/{self.name}/critic_{i}.pth")
-                    # self.save_plots(path=f"./plots/{self.name}/")
+                    torch.save(self.actor.state_dict(), f"./ppo/checkpoints/actor/{self.name}/actor_{i}.pth")
+                    torch.save(self.critic.state_dict(), f"./ppo/checkpoints/critic/{self.name}/critic_{i}.pth")
+                    self.save_plots(path=f"./ppo/plots/{self.name}/")
                 else:
-                    torch.save(self.actor.state_dict(), f"./Project/actor/{self.name}/actor_{i}.pth")
-                    torch.save(self.critic.state_dict(), f"./Project/critic/{self.name}/critic_{i}.pth")
-                    # self.save_plots(path=f"./Project/plots/{self.name}/")
-        # self.save_plots(path=f"./plots/{self.name}/", final=True)
+                    torch.save(self.actor.state_dict(), f"./Project/ppo/checkpoints/actor/{self.name}/actor_{i}.pth")
+                    torch.save(self.critic.state_dict(), f"./Project/ppo/checkpoints/critic/{self.name}/critic_{i}.pth")
+                    self.save_plots(path=f"./Project/plots/{self.name}/")
+                self.save_plots(path=f"./ppo/plots/{self.name}/", final=True)
         self.save_seed_results() 
   
     def rollout(self):
 
-        # We dont directly define torch tensors so that we don't have to allocate memory for the entire batch
         states = []
         actions = []
         log_probs = []
         rewards = []
         r2g = []
         ep_lengths = []
-
         ep_rewards = []
 
         t = 0
 
         while t < self.batch_size:
-            # print(f"\t{t = }")
             ep_rewards = []
             if self.ipynb:
                 state = self.env.reset()
@@ -185,7 +182,6 @@ class PPO_ours:
 
                 # Get the action from the actor
                 action, log_prob = self.get_action(state)
-                # print(f"{action = }")
 
                 # Take the action and get response from the environment
                 if self.ipynb:
@@ -198,7 +194,6 @@ class PPO_ours:
                 log_probs.append(log_prob)
                 ep_rewards.append(reward)
 
-                print(f"{reward = }")
 
                 if done:
                     break
@@ -226,7 +221,6 @@ class PPO_ours:
 
     def get_action(self, state):
         mean = self.actor(state, device=self.device)
-        # dist = MultivariateNormal(mean, torch.diag(std).to(self.device))
         dist = MultivariateNormal(mean, self.covariance)
 
         action = dist.sample()
@@ -329,7 +323,7 @@ class PPO_ours:
             plt.ylabel("Loss")
             plt.show()
 
-    def save_plots(self, path=".", final=False):
+    def save_plots(self, path="./", final=False):
 
         fig, axs = plt.subplots(1, 4, figsize=(20, 5))
         fig.suptitle("PPO Training Metrics")
@@ -381,7 +375,7 @@ class PPO_ours:
         
         name +='.json'
 
-        with open(f'./seed_data/{self.name}/' + name, 'w') as outfile:
+        with open(f'./ppo/data/seed_data/{self.name}/' + name, 'w') as outfile:
             for i in self.data:
                 json_string = json.dumps(i, indent=4, default=float)
                 outfile.write(json_string + '\n')

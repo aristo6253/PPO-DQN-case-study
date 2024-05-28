@@ -15,9 +15,6 @@ import random
 import gymnasium as gym
 import pandas as pd
 
-from IPython.display import clear_output
-from IPython import display
-
 from models.Q_agent import Architecture
 
 torch.manual_seed(0)
@@ -66,7 +63,6 @@ def train_loop():
                 print(f"The test reward for episode {m} is {reward_mean} with a standard deviation of {reward_sd}.")
                 reward_means.append(reward_mean)
 
-            # Collect rewards for each episode
             rewards.append(agent.test())
             compteur += 1
 

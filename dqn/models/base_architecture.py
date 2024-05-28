@@ -3,6 +3,9 @@ import torch.nn as nn
 import torch.optim as optim
 
 class NeuralNetwork(nn.Module):
+    """
+    This class is the actual neural network architecture for the learning and target networks
+    """
     def __init__(self, in_size, out_size):
         super(NeuralNetwork, self).__init__()
         self.linear1 = nn.Linear(in_size, 128)
@@ -27,6 +30,9 @@ class NeuralNetwork(nn.Module):
 
 
 class Q_model:
+    """
+    Q_model calls the bare architecture with the parameters it needs to run correctly.
+    """
     def __init__(self, env, lr, states, actions, logdir=None):
         self.net = NeuralNetwork(states, actions)
         self.env = env

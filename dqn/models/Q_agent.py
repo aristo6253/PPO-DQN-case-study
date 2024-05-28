@@ -10,6 +10,16 @@ from utils.memory import ExpMem
 Recording = namedtuple('Recording', ('state', 'action', 'next_state', 'reward'))
 
 class Architecture:
+    """
+    Architecture is the class that implements the whole pipeline of DQN. 
+
+    The constructor of the class initializes the environment, the hyperparameters, and the two networks.
+    save_in_mem instantiates the memory and saves the first random transitions and then initializes the first transitions.
+    e_greedy implements the epsilon greedy strategy
+    train implements the actual train step
+    test implements the test step
+
+    """
     def __init__(self, env_name, lr=5e-2, render=False, actions=2, states=4, mem_size=10000): #alexmod mem_size
         self.env = gym.make(env_name)
         self.lr = lr

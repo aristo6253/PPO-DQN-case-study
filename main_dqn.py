@@ -15,7 +15,7 @@ import random
 import gymnasium as gym
 import pandas as pd
 
-from models.Q_agent import Architecture
+from dqn.models.Q_agent import Architecture
 
 torch.manual_seed(0)
 np.random.seed(0)

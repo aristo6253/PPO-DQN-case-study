@@ -1,0 +1,12 @@
+torch
+numpy
+swig
+gymnasium[classic_control]
+gymnasium[box2d]
+opencv-python
+tqdm
+matplotlib
+pandas
+stable-baselines3[extra]>=2.0.0a4
+scipy
+seaborn

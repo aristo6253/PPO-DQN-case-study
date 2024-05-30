@@ -177,13 +177,11 @@ class PPO_ours:
                 
                 t += 1  # Increment time step for current batch
 
-                # Record the state
                 states.append(state)
 
-                # Get the action from the actor
                 action, log_prob = self.get_action(state)
 
-                # Take the action and get response from the environment
+                # Get response from the environment
                 if self.ipynb:
                     state, reward, done, _ = self.env.step(action)
                 else:
@@ -209,13 +207,6 @@ class PPO_ours:
 
         self.logger['episode_lengths'] = ep_lengths
         self.logger['episode_returns'] = rewards
-
-        # actions_ = torch.cat(tuple(actions)).detach().numpy()
-        # plt.hist(actions_, bins=50, range=(-1, 1))  # Adjust bins if needed for different resolutions
-        # plt.title('Distribution of Actions')
-        # plt.xlabel('Action Value')
-        # plt.ylabel('Frequency')
-        # plt.show()
 
         return states, actions, log_probs, r2g, ep_lengths
 

@@ -49,7 +49,7 @@ class Architecture:
 
             next_state, reward, terminated, truncated, _ = self.env.step(action)
             reward = torch.tensor([reward])
-            if terminated: # Because it still returns a non-empty next_state 
+            if terminated: 
                 next_state = None
             else:
                 next_state = torch.tensor(next_state, dtype=torch.float32).unsqueeze(0)
@@ -72,6 +72,7 @@ class Architecture:
         state = torch.tensor(state, dtype=torch.float32).unsqueeze(0)
         terminated = False
         truncated = False
+        update_freq = 50
 
         while not (terminated or truncated):
             with torch.no_grad():
@@ -116,7 +117,7 @@ class Architecture:
             self.learning_net.optimizer.step()
 
             self.c += 1
-            if self.c % 50 == 0:
+            if self.c % update_freq == 0:
                 self.target_net.net.load_state_dict(self.learning_net.net.state_dict())
             
 

@@ -20,9 +20,9 @@ from dqn.models.Q_agent import Architecture
 torch.manual_seed(0)
 np.random.seed(0)
 
-def train_loop():
-    env_name = 'CartPole-v1'
-    num_episodes_train = 500 #alexmod it was 1500
+def train_loop(environment):
+    env_name = environment
+    num_episodes_train = 1500 
     num_episodes_test = 20
     learning_rate = 5e-4
 
@@ -30,7 +30,7 @@ def train_loop():
     action_space_size = env.action_space.n
     state_space_size = env.observation_space.shape[0]
 
-    num_seeds = 3 #alexmod it was 3 
+    num_seeds = 3 
     l = num_episodes_train // 10
     res = np.zeros((num_seeds, l))
     all_rewards = []
@@ -76,7 +76,7 @@ def train_loop():
     df_dqn.columns = [f'seed_{i+1}' for i in range(num_seeds)]
     df_dqn['episode'] = df_dqn.index
 
-    df_dqn.to_csv('./csv/dqn_rewards_update_50.csv', index=False)
+    df_dqn.to_csv('./csv/dqn_rewards.csv', index=False)
     print("DQN rewards saved to dqn_rewards.csv")
     
     ks = np.arange(l) * 10
@@ -93,15 +93,15 @@ def train_loop():
 
     return agent
 
-def visual(agent):
-    env = gym.make('CartPole-v1', render_mode='rgb_array')
+def visual(agent, environment):
+    env = gym.make(environment, render_mode='rgb_array')
     state, _ = env.reset()
-    cv2.namedWindow("CartPole", cv2.WINDOW_NORMAL)  
+    cv2.namedWindow(environment, cv2.WINDOW_NORMAL)  
 
     for i in range(200):
         frame = env.render()
         frame_bgr = cv2.cvtColor(np.array(frame), cv2.COLOR_RGB2BGR)
-        cv2.imshow("CartPole", frame_bgr) 
+        cv2.imshow(environment, frame_bgr) 
 
         if cv2.waitKey(25) & 0xFF == ord('q'): 
             break
@@ -122,8 +122,9 @@ def visual(agent):
 
 
 def main():
-    agent = train_loop()
-    visual(agent)
+    env = "CartPole-v1"
+    agent = train_loop(env)
+    visual(agent, env)
 
 
 if __name__ == '__main__':
